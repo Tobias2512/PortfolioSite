@@ -24,7 +24,7 @@ const QREncoder = () => {
     formData.append('module_drawer', moduleDrawer);
     if (image) formData.append('image', image);
 
-    fetch('https://techwithtobi-23552367d09a.herokuapp.com/generate_qr_directly', {
+    fetch('https://portfoliosite-backend.onrender.com', {
       method: 'POST',
       body: formData,
     })
