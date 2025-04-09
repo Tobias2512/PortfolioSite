@@ -21,7 +21,7 @@ const projects = [
     name: 'QR Encoder',
     details: 'Uses qrcode and Streamlit to create a user-friendly interface. Hosted demo available.',
     github: 'https://www.google.com',
-    demoLink: '/projects/qr-encoder/demo',
+    demoLink: '/projects/qr-encoder',
   },
 ];
 

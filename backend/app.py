@@ -16,7 +16,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/generate_qr/")
+@app.post("/qr-encoder/")
 async def generate_qr(
     data: str = Form(...),
     module_drawer: int = Form(...),

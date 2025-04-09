@@ -21,7 +21,6 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/projects/qr-encoder" element={<QREncoder />} />
-        <Route path="/projects/qr-encoder/demo" element={<QREncoderDemo />} />
       </Routes>
     </Router>
   );
