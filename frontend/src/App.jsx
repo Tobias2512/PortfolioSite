@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Projects from './components/Projects';
 import ProjectDetail from './components/ProjectDetail';
+import QREncoder from './components/QREncoder';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
+        <Route path="/qr-encoder" element={<QREncoder />} />
       </Routes>
     </Router>
   );
