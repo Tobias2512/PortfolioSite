@@ -21,7 +21,7 @@ const QREncoder = () => {
     setMessage('Generating QR Code...');
     const formData = new FormData();
     formData.append('data', data);
-    formData.append('module_drawer', moduleDrawer);
+    formData.append('module_drawer', parseInt(moduleDrawer));
     if (image) formData.append('image', image);
 
     fetch('https://portfoliosite-backend.onrender.com/generate_qr/', {
