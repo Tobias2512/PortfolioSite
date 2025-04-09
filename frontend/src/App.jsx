@@ -20,7 +20,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
-        <Route path="/qr-encoder" element={<QREncoder />} />
+        <Route path="/projects/qr-encoder" element={<QREncoder />} />
+        <Route path="/projects/qr-encoder/demo" element={<QREncoderDemo />} />
       </Routes>
     </Router>
   );
