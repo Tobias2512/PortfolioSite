@@ -24,7 +24,7 @@ const QREncoder = () => {
     formData.append('module_drawer', moduleDrawer);
     if (image) formData.append('image', image);
 
-    fetch('https://portfoliosite-backend.onrender.com', {
+    fetch('https://portfoliosite-backend.onrender.com/generate_qr/', {
       method: 'POST',
       body: formData,
     })
