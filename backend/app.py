@@ -1,43 +1,64 @@
-from flask import Flask, request, jsonify, send_file
-from flask_cors import CORS
-from helpers.qr_helper import generate_qr_code_with_image
-from helpers.youtube_helper import download_youtube_video_temp
+from fastapi import FastAPI, UploadFile, Form, File, HTTPException
+from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
+from utilities.qr_helper import generate_qr_code
+import io
 import os
-import tempfile
+from PIL import Image
 
-app = Flask(__name__)
-CORS(app)
+app = FastAPI()
 
-@app.route('/')
-def home():
-    return "QR & YouTube API Server"
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://tobiashagenaars-portfolio.netlify.app"],
+    allow_credential=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.route('/generate_qr_direct', methods=['POST'])
-def generate_qr_direct():
-    data = request.form.get('data')
-    image_file = request.files.get('image')
-
-    if not data or not image_file:
-        return jsonify({'error': "Both 'data' and image file are required."}), 400
-
+@app.post("/generate_qr/")
+async def generate_qr(
+    data: str = Form(...),
+    module_drawer: int = Form(...),
+    image: UploadFile = File(None)
+):
+    # Controleer of de data en module_drawer valide zijn
+    if not data or len(data.strip()) == 0:
+        raise HTTPException(status_code=400, detail="Data is required.")
+    
+    if module_drawer not in [1, 2, 3, 4, 5, 6]:
+        raise HTTPException(status_code=400, detail="Invalid module drawer type.")
+    
+    # Controleer of het geüploade bestand een afbeelding is
+    image_path = None
+    if image:
+        if image.content_type not in ["image/png", "image/jpeg", "image/jpg"]:
+            raise HTTPException(status_code=400, detail="Invalid image format. Only PNG and JPG are allowed.")
+        
+        # Sla tijdelijk de afbeelding op
+        image_path = f"temp_{image.filename}"
+        with open(image_path, "wb") as f:
+            f.write(await image.read())
+        
+        # Zorg ervoor dat het bestand een geldige afbeelding is
+        try:
+            img = Image.open(image_path)
+            img.verify()  # Zorg ervoor dat het een geldige afbeelding is
+        except Exception as e:
+            raise HTTPException(status_code=400, detail="Uploaded file is not a valid image.")
+    
     try:
-        qr_buffer = generate_qr_code_with_image(data, image_file)
-        return send_file(qr_buffer, mimetype='image/png', as_attachment=True, download_name='qr_code.png')
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        # Genereer de QR-code met behulp van je helper
+        qr_img = generate_qr_code(data, image_path, module_drawer)
+    finally:
+        # Verwijder het tijdelijke bestand (als het is aangemaakt)
+        if image_path and os.path.exists(image_path):
+            os.remove(image_path)
 
-@app.route('/download_video_direct', methods=['POST'])
-def download_video_direct():
-    video_url = request.form.get('video_url')
+    # Zet de afbeelding in een in-memory buffer
+    img_io = io.BytesIO()
+    qr_img.save(img_io, format='PNG')
+    img_io.seek(0)
 
-    if not video_url:
-        return jsonify({'error': 'No video URL provided'}), 400
-
-    try:
-        temp_path = download_youtube_video_temp(video_url)
-        return send_file(temp_path, as_attachment=True, download_name='video.mp4', mimetype='video/mp4')
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    # Geef de gegenereerde QR-code terug als een streaming response
+    return StreamingResponse(img_io, media_type="image/png")
