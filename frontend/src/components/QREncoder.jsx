@@ -2,12 +2,12 @@ import { useState } from 'react';
 import './QREncoder.css';
 
 const qrStyles = [
-  { value: '1', label: 'Square', image: '/images/square.png' },
-  { value: '2', label: 'Gapped Square', image: '/images/gapped_square.png' },
-  { value: '3', label: 'Circle', image: '/images/circle.png' },
-  { value: '4', label: 'Rounded', image: '/images/rounded.png' },
-  { value: '5', label: 'Vertical Bars', image: '/images/vertical.png' },
-  { value: '6', label: 'Horizontal Bars', image: '/images/horizontal.png' },
+  { value: '1', label: 'Square', image: '/src/images/square.png' },
+  { value: '2', label: 'Gapped Square', image: '/src/images/gapped_square.png' },
+  { value: '3', label: 'Circle', image: '/src/images/circle.png' },
+  { value: '4', label: 'Rounded', image: '/src/images/rounded.png' },
+  { value: '5', label: 'Vertical Bars', image: '/src/images/vertical.png' },
+  { value: '6', label: 'Horizontal Bars', image: '/src/images/horizontal.png' },
 ];
 
 const QREncoder = () => {
