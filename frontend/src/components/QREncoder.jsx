@@ -2,12 +2,12 @@ import { useState } from 'react';
 import './QREncoder.css';
 
 const qrStyles = [
-  { value: '1', label: 'Square', image: '/src/images/square.png' },
-  { value: '2', label: 'Gapped Square', image: '/src/images/gapped_square.png' },
-  { value: '3', label: 'Circle', image: '/src/images/circle.png' },
-  { value: '4', label: 'Rounded', image: '/src/images/rounded.png' },
-  { value: '5', label: 'Vertical Bars', image: '/src/images/vertical.png' },
-  { value: '6', label: 'Horizontal Bars', image: '/src/images/horizontal.png' },
+  { value: '1', label: 'Square', image: 'https://tobiashagenaars-portfolio.netlify.app/images/square.png' },
+  { value: '2', label: 'Gapped Square', image: 'https://tobiashagenaars-portfolio.netlify.app/images/gapped_square.png' },
+  { value: '3', label: 'Circle', image: 'https://tobiashagenaars-portfolio.netlify.app/images/circle.png' },
+  { value: '4', label: 'Rounded', image: 'https://tobiashagenaars-portfolio.netlify.app/images/rounded.png' },
+  { value: '5', label: 'Vertical Bars', image: 'https://tobiashagenaars-portfolio.netlify.app/images/vertical.png' },
+  { value: '6', label: 'Horizontal Bars', image: 'https://tobiashagenaars-portfolio.netlify.app/images/horizontal.png' },
 ];
 
 const QREncoder = () => {
