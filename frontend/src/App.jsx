@@ -4,17 +4,12 @@ import Home from './components/Home';
 import Projects from './components/Projects';
 import ProjectDetail from './components/ProjectDetail';
 import QREncoder from './components/QREncoder';
+import Header from './components/Header';
 
 function App() {
   return (
     <Router>
-      <nav className="bg-gray-100 p-4 flex justify-between">
-        <Link to="/" className="text-xl font-semibold">Tobias' Portfolio</Link>
-        <div className="space-x-4">
-          <Link to="/" className="hover:underline">Home</Link>
-          <Link to="/projects" className="hover:underline">Projects</Link>
-        </div>
-      </nav>
+      <Header />
 
       <Routes>
         <Route path="/" element={<Home />} />
