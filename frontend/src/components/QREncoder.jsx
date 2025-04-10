@@ -96,7 +96,7 @@ const QREncoder = () => {
 
       {message && <p className="text-center mt-4 text-gray-600">{message}</p>}
       {qrImageUrl && (
-        <div classname="flex justify-center mt-6">
+        <div className="flex justify-center mt-6">
           <img
             src={qrImageUrl}
             alt="Generated QR"
