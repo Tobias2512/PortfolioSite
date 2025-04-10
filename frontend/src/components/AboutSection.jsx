@@ -18,14 +18,14 @@ const AboutSection = () => {
           <div className="flex justify-center md:justify-start gap-8 text-4xl text-blue-600">
             <a href="https://www.instagram.com/tobias_hagenaars" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
             <a href="https://www.linkedin.com/in/tobias-hagenaars" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-            <a href="hagenaarstobias@gmail.com"><FaEnvelope /></a>
+            <a href="mailto:hagenaarstobias@gmail.com"><FaEnvelope /></a>
           </div>
         </div>
 
         {/* Photo */}
         <div className="md:w-1/2">
           <img
-            src="/src/images/profile.jpg"
+            src="https://tobiashagenaars-portfolio.netlify.app/images/profile.jpg"
             alt="Tobias"
             className="rounded-xl shadow-xl object-cover w-full h-[500px]"
           />
